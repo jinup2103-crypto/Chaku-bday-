@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Happy Birthday Biluuuuu ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;overflow:hidden;font-family:Georgia,serif;background:linear-gradient(135deg,#fff1f5,#ffe5ed,#fff8ef);color:#633747}
+.page{display:none;width:100%;height:100vh;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:25px;position:relative}
+.page.active{display:flex}
+#countdown{font-size:110px;font-weight:bold;color:#d85b83;text-shadow:0 0 30px rgba(216,91,131,.35);animation:pulse 1s ease}
+@keyframes pulse{0%{transform:scale:.4;opacity:0}50%{transform:scale(1.2);opacity:1}100%{transform:scale(1);opacity:1}}
+.title{font-size:42px;color:#d85b83;animation:appear 1.5s ease;text-shadow:0 3px 15px rgba(216,91,131,.2)}
+.subtitle{margin-top:18px;font-size:21px}
+.heart{font-size:65px;animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.18)}}
+@keyframes appear{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+button{border:0;padding:14px 28px;margin-top:25px;border-radius:30px;background:#d85b83;color:#fff;font:17px Georgia;cursor:pointer;box-shadow:0 8px 25px rgba(216,91,131,.25)}
+button:active{transform:scale(.95)}
+.card{width:90%;max-width:500px;padding:30px 25px;border-radius:30px;background:rgba(255,255,255,.82);box-shadow:0 15px 45px rgba(100,50,70,.13)}
+.candle-area{position:relative;width:200px;height:270px;margin:15px}
+.candle{position:absolute;bottom:10px;left:70px;width:60px;height:150px;border-radius:8px 8px 5px 5px;background:linear-gradient(90deg,#ffc5d7,#fff,#ffd4e1);box-shadow:0 10px 25px rgba(0,0,0,.12)}
+.candle:after{content:"26";position:absolute;left:0;right:0;top:58px;font-size:19px;color:#d85b83;font-weight:bold}
+.wick{position:absolute;width:5px;height:23px;background:#3d2929;left:98px;top:82px;z-index:2}
+.flame{position:absolute;left:81px;top:27px;width:38px;height:60px;background:radial-gradient(circle at 50% 70%,white 5%,#ffe46b 28%,#ff9d3d 58%,transparent 72%);border-radius:50%;filter:drop-shadow(0 0 14px #ffb347);animation:flame .25s infinite alternate}
+@keyframes flame{to{transform:rotate(5deg) scale(1.08)}}
+.flame.off{display:none}
+#wishCard h1{color:#d85b83;margin-bottom:15px;font-size:31px}
+#wishCard p{font-size:18px;line-height:1.6}
+input{width:100%;margin-top:20px;padding:15px;border:1px solid #e6b3c3;border-radius:22px;outline:none;text-align:center;font-size:16px;font-family:inherit}
+#balloonsPage{justify-content:flex-start;padding-top:22px}
+.balloon-heading{font-size:28px;color:#d85b83}
+.counter{margin-top:7px;font-size:17px}
+.balloon-area{position:relative;width:100%;height:68vh}
+.balloon{position:absolute;width:56px;height:69px;border-radius:50%;cursor:pointer;box-shadow:inset -9px -10px 15px rgba(0,0,0,.12);animation:float 3s ease-in-out infinite}
+.balloon:after{content:"";position:absolute;width:1px;height:62px;background:#999;top:68px;left:28px}
+.balloon:before{content:"";position:absolute;width:9px;height:9px;bottom:-4px;left:24px;background:inherit;transform:rotate(45deg)}
+.balloon.popped{animation:pop .35s forwards}
+@keyframes float{50%{transform:translateY(-9px)}}
+@keyframes pop{60%{transform:scale(1.35)}100%{transform:scale(0);opacity:0}}
+.balloon-message{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.7);width:85%;max-width:360px;padding:25px 20px;background:rgba(255,255,255,.96);border-radius:25px;box-shadow:0 15px 45px rgba(90,40,60,.2);opacity:0;pointer-events:none;transition:.4s;z-index:20}
+.balloon-message.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.number{color:#d85b83;font-size:16px;margin-bottom:8px}
+.quality{font-size:27px;font-weight:bold}
+.message-card{animation:appear 1s ease}
+.message-card h1{color:#d85b83;font-size:31px;margin:15px 0}
+.message-card p{font-size:19px;line-height:1.75}
+.end-title{font-size:40px;color:#d85b83;margin-bottom:20px}
+.end-quote{max-width:470px;font-size:22px;line-height:1.7}
+.end-love{margin-top:25px;font-size:24px}
+.sparkle{position:fixed;font-size:20px;pointer-events:none;z-index:100;animation:sparkle 2s linear forwards}
+@keyframes sparkle{0%{opacity:0;transform:scale(.3)}25%{opacity:1}100%{opacity:0;transform:scale(1.4) translateY(-120px)}}
+#musicBtn{position:fixed;right:12px;top:12px;z-index:200;margin:0;padding:10px 15px;font-size:14px;background:rgba(216,91,131,.9)}
+</style>
+</head>
+<body>
+
+<button id="musicBtn" onclick="toggleMusic()">🎵 Music: Off</button>
+
+<section id="countdownPage" class="page active"><div id="countdown">3</div></section>
+
+<section id="birthdayPage" class="page">
+  <div class="heart">❤️</div>
+  <h1 class="title">Happy Birthday Biluuuuu! 🥳</h1>
+  <p class="subtitle">Today is all about YOU ✨</p>
+  <button onclick="goToCandle()">Let's Begin 💌</button>
+</section>
+
+<section id="candlePage" class="page">
+  <div class="card">
+    <h1>Make a wish first... 🕯️</h1>
+    <p style="margin-top:8px">One little candle just for you ✨</p>
+    <div class="candle-area"><div class="flame" id="flame"></div><div class="wick"></div><div class="candle"></div></div>
+    <p id="candleText">Now blow the candle 💨</p>
+    <button id="blowButton" onclick="blowCandle()">💨 Blow Candle</button>
+  </div>
+</section>
+
+<section id="wishPage" class="page">
+  <div class="card" id="wishCard">
+    <h1>✨ Make a Wish ✨</h1>
+    <p>Close your eyes...<br>Think of something your heart really wants. 🤍</p>
+    <input id="wishInput" placeholder="Type your wish here...">
+    <button onclick="makeWish()">My Wish Is Made 💫</button>
+  </div>
+</section>
+
+<section id="balloonsPage" class="page">
+  <h1 class="balloon-heading">🎈 26 Things I Love About You 🎈</h1>
+  <div class="counter"><span id="balloonCount">0</span> / 26</div>
+  <div class="balloon-area" id="balloonArea"></div>
+  <div class="balloon-message" id="balloonMessage"><div class="number" id="messageNumber"></div><div class="quality" id="messageQuality"></div></div>
+</section>
+
+<section id="messagePage" class="page">
+  <div class="card message-card">
+    <div class="heart" style="font-size:48px">❤️</div>
+    <h1>My Biluuuuu 🥹</h1>
+    <p>
+      Many Many happy returns of the day..... 🥳<br><br>
+      Happy Birthday Tiwari ji... 🥳<br><br>
+      Have a great years ahead....<br><br>
+      Stay happy, stay healthy, stay wealthy..<br><br>
+      God bless you 😇
+    </p>
+  </div>
+  <button onclick="showEnding()">One Last Surprise 🌷</button>
+</section>
+
+<section id="endPage" class="page">
+  <div class="end-title">🌷 Have a Nice Day 🌷</div>
+  <div class="end-quote">“May your day be filled with smiles, peaceful moments, beautiful memories, and everything that makes your heart happy.” 🤍</div>
+  <div class="end-love">Love you, Biluuuuu ❤️</div>
+</section>
+
+<script>
+const qualities=[
+"Kind-hearted 🤍","Polite 🌷","Caring 🫶","Understanding 💕","Respectful ✨",
+"Patient 🌸","Honest 🤍","Loyal ❤️","Supportive 🥹","Thoughtful 💭",
+"Humble 🌿","Genuine 🤍","Hardworking 💪","Responsible 🌟","Sweet 🍭",
+"Funny 😂","Protective 🫂","Warm-hearted ❤️","Generous 🌷","Calm ☁️",
+"Strong 💪","Mature ✨","Compassionate 🥹","Always there when I need you 🫶",
+"My comfort person 🤍","Simply YOU — my favourite person ❤️"
+];
+
+let popped=0,musicOn=false,audioCtx=null,musicTimer=null;
+
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(id).classList.add("active")}
+function sparkleEffect(){["✨","💖","💕","⭐","🌸","🤍"].forEach((s,i)=>{let e=document.createElement("div");e.className="sparkle";e.textContent=s;e.style.left=Math.random()*100+"vw";e.style.top=(35+Math.random()*55)+"vh";e.style.animationDelay=(i*.04)+"s";document.body.appendChild(e);setTimeout(()=>e.remove(),2100)})}
+
+let count=3;
+const timer=setInterval(()=>{count--;if(count>0){let c=document.getElementById("countdown");c.textContent=count;c.style.animation="none";void c.offsetWidth;c.style.animation="pulse 1s ease"}else{clearInterval(timer);document.getElementById("countdown").textContent="✨";setTimeout(()=>{showPage("birthdayPage");sparkleEffect();},700)}},1000);
+
+function goToCandle(){showPage("candlePage");sparkleEffect();playSound("chime")}
+function blowCandle(){
+  document.getElementById("flame").classList.add("off");
+  document.getElementById("candleText").innerHTML="Yayyy! Candle blown! ✨<br>Your wish is now on its way... 🤍";
+  document.getElementById("blowButton").style.display="none";
+  playSound("blow");sparkleEffect();
+  setTimeout(()=>showPage("wishPage"),2200);
+}
+function makeWish(){
+  if(!document.getElementById("wishInput").value.trim()){alert("Make your wish first ✨");return}
+  playSound("chime");sparkleEffect();
+  setTimeout(()=>{showPage("balloonsPage");createBalloons()},800);
+}
+function createBalloons(){
+  const area=document.getElementById("balloonArea");area.innerHTML="";popped=0;document.getElementById("balloonCount").textContent="0";
+  const colors=["#ff8fab","#ffc2d1","#ffb3c6","#f7aef8","#cdb4db","#bde0fe","#a2d2ff"];
+  for(let i=0;i<26;i++){
+    const b=document.createElement("div");b.className="balloon";b.style.background=colors[Math.floor(Math.random()*colors.length)];
+    b.style.left=(Math.random()*88)+"%";b.style.top=(Math.random()*82)+"%";b.style.animationDelay=(Math.random()*2)+"s";
+    b.onclick=()=>popBalloon(b,i);area.appendChild(b);
+  }
+}
+function popBalloon(b,index){
+  if(b.classList.contains("popped"))return;b.classList.add("popped");popped++;
+  document.getElementById("balloonCount").textContent=popped;
+  document.getElementById("messageNumber").textContent="Balloon "+(index+1)+" of 26";
+  document.getElementById("messageQuality").textContent=qualities[index];
+  document.getElementById("balloonMessage").classList.add("show");playSound("pop");sparkleEffect();
+  setTimeout(()=>{
+    document.getElementById("balloonMessage").classList.remove("show");
+    if(popped===26)setTimeout(()=>{showPage("messagePage");sparkleEffect();playSound("fanfare")},700);
+  },1100);
+}
+function showEnding(){showPage("endPage");sparkleEffect();playSound("chime");setInterval(sparkleEffect,3000)}
+
+/* Soft generated background melody — no external audio file needed */
+function startMusic(){
+  if(musicOn)return;
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  musicOn=true;document.getElementById("musicBtn").textContent="🎵 Music: On";
+  const notes=[261.63,329.63,392,329.63,293.66,349.23,440,349.23];
+  let n=0;
+  function note(){
+    if(!musicOn)return;
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+    o.type="sine";o.frequency.value=notes[n++%notes.length];
+    g.gain.setValueAtTime(.0001,audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.025,audioCtx.currentTime+.08);
+    g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+1.0);
+    o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+1.05);
+  }
+  note();musicTimer=setInterval(note,900);
+}
+function toggleMusic(){if(!musicOn){startMusic()}else{musicOn=false;clearInterval(musicTimer);if(audioCtx)audioCtx.close();document.getElementById("musicBtn").textContent="🎵 Music: Off"}}
+function playSound(type){
+  if(!audioCtx){try{audioCtx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return}}
+  const now=audioCtx.currentTime;
+  if(type==="pop"){
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type="triangle";o.frequency.setValueAtTime(500,now);o.frequency.exponentialRampToValueAtTime(90,now+.12);g.gain.setValueAtTime(.12,now);g.gain.exponentialRampToValueAtTime(.001,now+.13);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(now+.14);
+  }else{
+    const freqs=type==="fanfare"?[523.25,659.25,783.99,1046.5]:[659.25,783.99];
+    freqs.forEach((f,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(.001,now+i*.13);g.gain.exponentialRampToValueAtTime(.09,now+i*.13+.03);g.gain.exponentialRampToValueAtTime(.001,now+i*.13+.25);o.connect(g);g.connect(audioCtx.destination);o.start(now+i*.13);o.stop(now+i*.13+.27)})
+  }
+}
+document.body.addEventListener("click",()=>{if(audioCtx&&audioCtx.state==="suspended")audioCtx.resume()},{once:true});
+</script>
+</body>
+</html>
